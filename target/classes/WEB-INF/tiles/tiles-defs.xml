@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<!-- *******************************************************************-->
+	<!--*************************** Layouts ********************************-->
+	<!-- *******************************************************************-->
+	
+	<!--*********************** empty layout ********************************-->
+	<definition name="emptyLayout" template="/views/layout/emptyLayout.jsp">
+		<put-attribute name="mainBody" value="/views/common/none.jsp" />
+	</definition>
+	
+	<!--*********************** login layout ********************************-->
+	<definition name="doc.loginLayout" template="/views/layout/LoginLayout.jsp">
+		<put-attribute name="header" value="/views/common/Header.jsp" />
+		<put-attribute name="mainBody" value="/views/common/none.jsp" />
+		<put-attribute name="title" value="PMS - Patient Management System" />
+	</definition>
+	
+	<!--*********************** Main layout ********************************-->	
+	<definition name="doc.mainLayout" template="/views/layout/MainLayout.jsp">
+		<put-attribute name="hasWelcome" value="Y"/>
+		<put-attribute name="header" value="/views/common/Header.jsp" />
+		<put-attribute name="menu" value="/views/common/Menu.jsp" />
+		<put-attribute name="mainBody" value="/views/common/none.jsp" />
+		<put-attribute name="footer" value="/views/common/Footer.jsp" />
+		<put-attribute name="title" value="PMS - Patient Management System" />
+	</definition>
+	
+	
+	<!--*********************** layout defs ********************************-->	
+	
+	
+	<definition name="doc.homeLayout" extends="doc.mainLayout">
+		<put-attribute name="menu" value="/views/common/Menu.jsp" />
+	</definition>
+	
+	<!-- *******************************************************************-->
+	<!-- ********************** public pages *******************************-->
+	<!-- *******************************************************************-->
+
+	<!--*********************** wildcard pages ******************************-->
+
+	<!-- homepage -->
+	<definition name="/homepage" extends="doc.mainLayout">
+		<put-attribute name="mainBody" value="/views/homepage.jsp" />
+	</definition>
+	
+	<!-- Login -->
+	<definition name="/loginpage" extends="doc.mainLayout">
+		<put-attribute name="mainBody" value="/views/loginpage.jsp" />
+		<put-attribute name="menu" value="/views/common/none.jsp" />
+	</definition>
+	
+	<!-- Manage Book -->
+	<definition name="/bookmanagement" extends="doc.mainLayout">
+		<put-attribute name="mainBody" value="/views/bookmanagement.jsp" />
+	</definition>
+	
+	<!-- Manage Restriction -->
+	<definition name="/restrictionmanagement" extends="doc.mainLayout">
+		<put-attribute name="mainBody" value="/views/restrictionmanagement.jsp" />
+	</definition>
+	
+	<!-- Patient Search -->
+	<definition name="/patientsearch" extends="doc.mainLayout">
+		<put-attribute name="mainBody" value="/views/patientsearch.jsp" />
+	</definition>
+	
+	<!-- Password Change -->
+	<definition name="/passwordchange" extends="doc.mainLayout">
+		<put-attribute name="mainBody" value="/views/passwordchange.jsp" />
+	</definition>
+	
+	<!-- Disease Management -->
+	<definition name="/diseasemanagement" extends="doc.mainLayout">
+		<put-attribute name="mainBody" value="/views/diseasemanagement.jsp" />
+	</definition>
+	
+	<!-- Patient Registration -->
+	<definition name="/patientregistration" extends="doc.mainLayout">
+		<put-attribute name="mainBody" value="/views/patientregistration.jsp" />
+	</definition>
+	
+</tiles-definitions>
+
+
+
+

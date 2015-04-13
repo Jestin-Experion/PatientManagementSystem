@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context path="/PatientManagementSystem" reloadable="true" docBase="/PatientManagementSystem">
+   <Environment description="Prod or test Environment" name="jndi/environment"
+		override="false" type="java.lang.String" value="test" />
+		
+	<Resource 
+		name="jdbc/pmsDB" 
+		auth="Container"  
+        type="javax.sql.DataSource"  
+        driverClassName="net.sourceforge.jtds.jdbc.Driver"  
+		maxActive="10000" 
+		maxIdle="30" 
+		maxWait="1000"
+		username="sa" 
+		password="experion"
+		url="jdbc:jtds:sqlserver://192.168.4.111:1433/PMS"/>
+
+</Context>
+<!-- driverClassName="net.sourceforge.jtds.jdbc.Driver" -->
+<!-- driverClassName="oracle.jdbc.driver.OracleDriver"-->

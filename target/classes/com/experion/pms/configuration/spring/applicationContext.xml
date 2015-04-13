@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:p="http://www.springframework.org/schema/p"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- <import resource="springTimer.xml" /> -->	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configurationClass"><value>org.hibernate.cfg.AnnotationConfiguration</value></property>
+		<property name="annotatedClasses">
+			<list>
+		    	<value>com.experion.pms.entity.Book</value>
+		    	<value>com.experion.pms.entity.Restriction</value>
+		    	<value>com.experion.pms.entity.FoodCategory</value>
+		    	<value>com.experion.pms.entity.FoodProduct</value>
+		    	<value>com.experion.pms.entity.RestrictionList</value>
+		    	<value>com.experion.pms.entity.Facility</value>
+		    	<value>com.experion.pms.entity.DiseaseClassification</value>
+		    	<value>com.experion.pms.entity.DiseaseSubClassification</value>
+		    	<value>com.experion.pms.entity.Disease</value>
+		    	<value>com.experion.pms.entity.PatientDisease</value>
+		    	<value>com.experion.pms.entity.PatientRegistration</value>
+		    	<value>com.experion.pms.entity.PatientVisit</value>
+		    	<value>com.experion.pms.entity.User</value>
+		    	<value>com.experion.pms.entity.UserLog</value>
+		    	<value>com.experion.pms.entity.Menu</value>
+		    	<value>com.experion.pms.entity.SubMenu</value>
+		    	<value>com.experion.pms.entity.UserRole</value>
+		    	<value>com.experion.pms.entity.Privilege</value>
+		    </list>
+		</property>		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- <prop key="hibernate.cglib.use_reflection_optimizer">false</prop> -->
+			</props>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+	
+
+	<!--  JNDI objects -->
+	<bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<!-- Use this JNDI lookup for TOMCAT. -->
+		 <property name="jndiName">
+			<value>java:comp/env/jdbc/pmsDB</value>
+		</property> 
+	</bean>
+	
+	
+	 <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/resources/Messages"/>
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" id="log4jInitialization"> 
+		<property name="targetClass" value="org.springframework.util.Log4jConfigurer"/> 
+		<property name="targetMethod" value="initLogging"/> 
+		<property name="arguments"> 
+			<list> 
+				<value>classpath:log4j.xml</value> 
+			</list> 
+		</property> 
+	</bean>
+	
+	
+	
+	<!-- Restriction Management beans -->
+	<bean id="restrictionManagementService" class="com.experion.pms.service.impl.RestrictionManagementServiceImpl">
+		<property name="restrictionManagementDAO">
+			<ref bean="restrictionManagementDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="restrictionManagementDAO" class="com.experion.pms.dao.hibernate.RestrictionManagementHibernateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
+	<!-- Patient Search beans -->
+	<bean id="patientSearchService" class="com.experion.pms.service.impl.PatientSearchServiceImpl">
+		<property name="patientSearchDAO">
+			<ref bean="patientSearchDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="patientSearchDAO" class="com.experion.pms.dao.hibernate.PatientSearchHibernateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- Login beans -->
+	<bean id="loginService" class="com.experion.pms.service.impl.LoginServiceImpl">
+		<property name="loginDAO">
+			<ref bean="loginDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="loginDAO" class="com.experion.pms.dao.hibernate.LoginHibernateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	
+	<!-- Disease Management beans -->
+	<bean id="diseaseManagementService" class="com.experion.pms.service.impl.DiseaseManagementServiceImpl">
+		<property name="diseaseManagementDAO">
+			<ref bean="diseaseManagementDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="diseaseManagementDAO" class="com.experion.pms.dao.hibernate.DiseaseManagementHibernateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!--  Services -->
+	<bean id="bookManagementService" class="com.experion.pms.service.impl.BookManagementServiceImpl">
+		<property name="bookManagementDAO">
+			<ref bean="bookManagementDAO" />
+		</property>
+		<property name="messageSource">
+			<ref bean="messageSource" />
+		</property>
+	</bean>
+	<bean id="bookManagementDAO" class="com.experion.pms.dao.hibernate.BookManagementHibernateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="messageSource">
+			<ref bean="messageSource" />
+		</property>
+	</bean>
+	
+</beans>

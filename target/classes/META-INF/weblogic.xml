@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<weblogic-web-app>
+	 <context-root>/gcp</context-root>
+	 <resource-description>
+		 <res-ref-name>jdbc/gcpDB</res-ref-name>
+		 <jndi-name>jdbc/gcpDB</jndi-name>
+	 </resource-description>
+	 <library-directory>/lib</library-directory>
+	 
+</weblogic-web-app>
